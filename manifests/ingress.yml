@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-otrs-projects
+  namespace: treinamento-microservices
+  labels:
+    app: projects
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - api.domain.com.br
+    secretName: tls-4linux
+  rules:
+  - host: api.domain.com.br
+    http:
+      paths:
+      - path: /otrs-projects(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-otrs-projects
+            port:
+              number: 5000

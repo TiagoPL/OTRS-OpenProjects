@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: treinamento-microservices
+  name: svc-otrs-projects
+  labels:
+    app: projects
+spec:
+  selector:
+    app: projects
+  type: LoadBalancer
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
